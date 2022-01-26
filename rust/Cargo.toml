@@ -21,6 +21,7 @@ sha3 = { version = "0.9.1", default-features = false }
 ripemd160 = { version = "0.9.1", default-features = false }
 anyhow = { version = "1.0.40", default-features = false }
 sp-std = {version = "3.0.0", default-features = false }
+jmt = { git = "https://github.com/penumbra-zone/jellyfish-merkle.git", branch = "main" }
 
 [dev-dependencies]
 serde = { version = "1.0.125", features = ["derive"] }
