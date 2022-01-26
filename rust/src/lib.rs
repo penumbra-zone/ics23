@@ -13,6 +13,8 @@ mod ics23;
 mod ops;
 mod verify;
 
+pub mod tmp_jmt;
+
 pub use crate::ics23::*;
 pub use api::{
     iavl_spec, tendermint_spec, verify_batch_membership, verify_batch_non_membership,
