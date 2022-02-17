@@ -207,23 +207,25 @@ pub fn tendermint_spec() -> ics23::ProofSpec {
 pub fn penumbra_spec() -> ics23::ProofSpec {
     let leaf = ics23::LeafOp {
         hash: ics23::HashOp::Sha256.into(),
-        prehash_key: 0,
+        prehash_key: 0, //why is this zero in tendermint/iavl specs?
         prehash_value: ics23::HashOp::Sha256.into(),
-        length: ics23::LengthOp::VarProto.into(),
-        prefix: vec![0_u8],
+        length: ics23::LengthOp::VarProto.into(), //encoding for length data - can be set to constant size if constant size
+        prefix: vec![0_u8],                       //use actual prefix
     };
     let inner = ics23::InnerSpec {
-        child_order: vec![0, 1],
-        min_prefix_length: 1,
-        max_prefix_length: 1,
+        child_order: vec![0, 1], //where exactly does this need to be true?
+        min_prefix_length: 1,    //what is this?
+        max_prefix_length: 1,    //and this?
         child_size: 32,
-        empty_child: vec![],
+        empty_child: vec![], //check JMT repo to determine if special value used here
         hash: ics23::HashOp::Sha256.into(),
+        //where is the internal node prefix (cf. 'prefix' in LeafOp)? do we get one? is that bad?
+        //If no leaf node prefix, then inner node?
     };
     ics23::ProofSpec {
         leaf_spec: Some(leaf),
         inner_spec: Some(inner),
-        min_depth: 0,
+        min_depth: 0, //Min depth may need to be 1, because we will have root + JMT + NCT
         max_depth: 0,
     }
 }
