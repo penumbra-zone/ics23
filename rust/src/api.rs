@@ -231,6 +231,35 @@ pub fn smt_spec() -> ics23::ProofSpec {
     }
 }
 
+pub fn jmt_spec() -> ics23::ProofSpec {
+    ics23::ProofSpec {
+        leaf_spec: Some(ics23::LeafOp {
+            hash: ics23::HashOp::Sha256.into(),
+            prehash_key: ics23::HashOp::Sha256.into(),
+            prehash_value: ics23::HashOp::Sha256.into(),
+            length: ics23::LengthOp::NoPrefix.into(),
+            prefix: b"JMT::LeafNode".to_vec(),
+            prefix_prehash_key: b"JMT::Key".to_vec(),
+            prefix_prehash_value: b"JMT::Value".to_vec(),
+        }),
+        inner_spec: Some(ics23::InnerSpec {
+            // This is the only field we're sure about
+            hash: ics23::HashOp::Sha256.into(),
+            // These fields are apparently used for neighbor tests in range proofs,
+            // and could be wrong:
+            child_order: vec![0, 1], //where exactly does this need to be true?
+            min_prefix_length: 16,   //what is this?
+            max_prefix_length: 48,   //and this?
+            child_size: 32,
+            empty_child: vec![], //check JMT repo to determine if special value used here
+        }),
+        // TODO: check this
+        min_depth: 0,
+        // TODO:
+        max_depth: 64,
+    }
+}
+
 #[cfg(feature = "std")]
 #[cfg(test)]
 mod tests {
