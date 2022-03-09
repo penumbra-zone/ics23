@@ -239,8 +239,6 @@ pub fn jmt_spec() -> ics23::ProofSpec {
             prehash_value: ics23::HashOp::Sha256.into(),
             length: ics23::LengthOp::NoPrefix.into(),
             prefix: b"JMT::LeafNode".to_vec(),
-            prefix_prehash_key: b"JMT::Key".to_vec(),
-            prefix_prehash_value: b"JMT::Value".to_vec(),
         }),
         inner_spec: Some(ics23::InnerSpec {
             // This is the only field we're sure about

@@ -125,14 +125,6 @@ fn ensure_leaf(leaf: &ics23::LeafOp, leaf_spec: &ics23::LeafOp) -> Result<()> {
         has_prefix(&leaf_spec.prefix, &leaf.prefix),
         "Incorrect prefix on leaf"
     );
-    ensure!(
-        has_prefix(&leaf_spec.prefix_prehash_key, &leaf.prefix_prehash_key),
-        "Incorrect prefix_prehash_key on leaf"
-    );
-    ensure!(
-        has_prefix(&leaf_spec.prefix_prehash_value, &leaf.prefix_prehash_value),
-        "Incorrect prefix_prehash_value on leaf"
-    );
     Ok(())
 }
 
